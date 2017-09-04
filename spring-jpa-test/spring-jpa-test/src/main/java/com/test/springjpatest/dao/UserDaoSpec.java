@@ -12,11 +12,10 @@ import com.test.springjpatest.entity.User;
 import com.test.springjpatest.entity.User_;
 
 /**
- * Created with IntelliJ IDEA.
- * User: lu
- * Date: 17-3-30
- * Time: 下午8:05
- * To change this template use File | Settings | File Templates.
+ * where子句后面的属性操作
+ * 
+ * @author zhLV1
+ *
  */
 public class UserDaoSpec {
     public static Specification<User> getSpec(final String name,final int age,final String address) {
