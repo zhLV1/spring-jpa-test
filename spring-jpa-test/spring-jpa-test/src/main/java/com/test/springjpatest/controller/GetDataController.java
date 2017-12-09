@@ -1,5 +1,6 @@
 package com.test.springjpatest.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import net.sf.json.JSONArray;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.test.springjpatest.Async.TaskAsync;
 import com.test.springjpatest.constant.Sex;
 import com.test.springjpatest.dao.UserDaoSpec;
 import com.test.springjpatest.entity.User;
@@ -26,7 +28,9 @@ public class GetDataController {
 
 	@Autowired
 	private IUserService userService;
-
+	@Autowired
+	private TaskAsync task;
+	
 	@GetMapping("/hello")
 	public String hello() {
 		return "hello world";
@@ -99,5 +103,18 @@ public class GetDataController {
 		return json.toString();
 
 	}
+	@GetMapping("async")
+	public String async(){
+		Calendar calendar=Calendar.getInstance();
+		long current=calendar.getTimeInMillis();
+		for(int i=0;i<100;i++){
+			task.task(i, current);
+		}
+		Calendar calendar1=Calendar.getInstance();
+		long current1=calendar1.getTimeInMillis();
+		return "ok:"+(current1-current);
+	}
+	
+	
 
 }
